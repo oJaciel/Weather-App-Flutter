@@ -11,7 +11,7 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   //API Key
-  final _weatherService = WeatherService('3fe60800f4957e1f1345c85c63a85e90');
+  final _weatherService = WeatherService('44c441eb96db47d2e9498d48c0dcea5c');
   Weather? _weather;
 
   //Buscar clima
@@ -46,6 +46,19 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          //Nome da Cidade
+          Text(_weather?.cityName ?? "Carregando cidade"),
+        
+          //Temperatura
+          Text('${_weather?.temperature.round()}°C')
+        
+        ],),
+      ),
+    );
   }
 }
