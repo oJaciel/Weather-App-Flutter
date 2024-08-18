@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weatherapp/models/weather_model.dart';
 import 'package:weatherapp/services/weather_service.dart';
 
@@ -33,7 +34,30 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
-  //Animações de clima
+  //Animações conforme clima
+  String getWeatherAnimation(String? mainCondition) {
+    if (mainCondition == null) return 'assets/sun.json';
+
+    switch (mainCondition.toLowerCase()) {
+      case 'clouds':
+      case 'mist':
+      case 'smoke':
+      case 'haze':
+      case 'dust':
+      case 'fog':
+        return 'assets/cloud.json';
+      case 'rain':
+      case 'drizzle':
+      case 'shower rain':
+        return 'assets/rain.json';
+      case 'thunderstorm':
+        return 'assets/thunder.json';
+      case 'clear':
+        return 'assets/sun.json';
+      default:
+        return 'assets/sun.json';
+    }
+  }
 
   //Estado inicial
   @override
@@ -51,13 +75,19 @@ class _WeatherPageState extends State<WeatherPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          //Nome da Cidade
-          Text(_weather?.cityName ?? "Carregando cidade"),
-        
-          //Temperatura
-          Text('${_weather?.temperature.round()}°C')
-        
-        ],),
+            //Nome da Cidade
+            Text(_weather?.cityName ?? "Carregando cidade"),
+
+            //Animação
+            Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
+
+            //Temperatura
+            Text('${_weather?.temperature.round()}°C'),
+
+            //Clima
+            Text(_weather?.mainCondition ?? ""),
+          ],
+        ),
       ),
     );
   }
