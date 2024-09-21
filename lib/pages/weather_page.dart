@@ -75,17 +75,63 @@ class _WeatherPageState extends State<WeatherPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //Nome da Cidade
-            Text(_weather?.cityName ?? "Carregando cidade"),
+            // Espaço no topo
+            SizedBox(height: 30),
 
-            //Animação
-            Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
+            const Center(
+              child: 
+              Icon(Icons.location_pin, color: Colors.black,)
+            ),
 
-            //Temperatura
-            Text('${_weather?.temperature.round()}°C'),
+            // Nome da Cidade com ícone de localização
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                SizedBox(width: 8),
+                Text(
+                  _weather?.cityName ?? "Carregando cidade",
+                  style: TextStyle(
+                    fontFamily: 'Bebas',
+                    fontSize: 24,
+                  ),
+                ),
+              ],
+            ),
 
-            //Clima
-            Text(_weather?.mainCondition ?? ""),
+            // Espaço entre cidade e animação
+            SizedBox(height: 20),
+
+            // Animação do clima
+            Lottie.asset(
+              getWeatherAnimation(_weather?.mainCondition),
+              width: 200,
+              height: 200,
+            ),
+
+            // Espaço entre animação e temperatura
+            SizedBox(height: 20),
+
+            // Temperatura
+            Text(
+              '${_weather?.temperature.round()}°',
+              style: TextStyle(
+                fontFamily: 'Bebas',
+                fontSize: 64,
+              ),
+            ),
+
+            // Espaço entre temperatura e condição climática
+            SizedBox(height: 10),
+
+            // Clima
+            Text(
+              _weather?.mainCondition ?? "",
+              style: TextStyle(
+                fontFamily: 'Bebas',
+                fontSize: 24,
+              ),
+            ),
           ],
         ),
       ),
